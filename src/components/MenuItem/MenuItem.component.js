@@ -42,7 +42,6 @@ const ItemTitleContainer = styled(Container)`
 `;
 
 const MenuItem = ({ section, history, match }) => {
-  console.log(history);
   return (
     <MenuItemContainer size={section.imageSize} imageUrl={section.imageUrl}>
       {/* <img src={section.imageUrl} alt={section.id} /> */}

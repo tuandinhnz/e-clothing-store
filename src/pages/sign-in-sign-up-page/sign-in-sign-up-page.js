@@ -1,12 +1,14 @@
 import React from 'react';
 
 import SignIn from '../../components/SignIn/SignIn';
-import { Row, Button } from '../../shared';
+import SignUp from '../../components/SignUp/SignUp.component';
+import { Row } from '../../shared';
 
 const SignInSignUp = () => {
   return (
     <Row>
       <SignIn />
+      <SignUp />
     </Row>
   );
 };

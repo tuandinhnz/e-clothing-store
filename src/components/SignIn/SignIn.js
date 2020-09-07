@@ -2,13 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { signInWithGoogle } from '../../firebase/firebase.utils';
 
-import { Row, Button, Container } from '../../shared';
+import { Button, Container } from '../../shared';
 
 const SignInContainer = styled(Container)`
   width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 30px;
 `;
 
 const SignInTitle = styled.h2`

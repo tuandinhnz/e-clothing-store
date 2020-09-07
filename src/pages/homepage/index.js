@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import MenuItem from '../../components/MenuItem';
+import MenuItem from '../../components/MenuItem/MenuItem.component';
 
 import { sections } from '../../assets/data/directory.data';
 import { Section, Row } from '../../shared';
