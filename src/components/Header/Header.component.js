@@ -10,7 +10,6 @@ import CartDropdown from '../CartDropDown/CartDropDown.component';
 
 const NavBar = styled(Row)`
   display: flex;
-
   align-items: center;
   height: 60px;
   background-color: lightgrey;

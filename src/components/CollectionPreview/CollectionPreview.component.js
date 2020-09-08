@@ -1,28 +1,20 @@
 import React from 'react';
 
-const CollectionPreview = ({ title, items }) => {
-  const renderedPreviewItem = items
-    //filter out first 4 items. Considering performance.
-    .filter((item, idx) => idx < 4)
-    .map((item) => {
-      return (
-        <div key={item.id}>
-          <img
-            src={require('../../assets/img/shop-img/hats/brown-brim.png')}
-            alt={item.name}
-            width="100px"
-          />
-          {item.name}
-        </div>
-      );
-    });
-  return (
-    <div>
-      <h1>{title}</h1>
+import CollectionItem from '../CollectionItem/CollectionItem.component';
 
-      <div>{renderedPreviewItem}</div>
+import './collection-preview.styles.scss';
+
+const CollectionPreview = ({ title, items }) => (
+  <div className="collection-preview">
+    <h1 className="title">{title.toUpperCase()}</h1>
+    <div className="preview">
+      {items
+        .filter((item, idx) => idx < 4)
+        .map((item) => (
+          <CollectionItem key={item.id} item={item} />
+        ))}
     </div>
-  );
-};
+  </div>
+);
 
 export default CollectionPreview;

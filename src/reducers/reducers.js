@@ -1,15 +1,21 @@
 import { combineReducers } from 'redux';
-import { SET_CURRENT_USER, TOGGLE_CART_HIDDEN } from '../actions/actions.type';
+import {
+  SET_CURRENT_USER,
+  TOGGLE_CART_HIDDEN,
+  ADD_ITEM_TO_CART,
+} from '../actions/actions.type';
+import { addItemToCart } from './cart.utils';
 
-const INITIAL_STATE = {
+const USER_INITIAL_STATE = {
   currentUser: null,
 };
 
 const CART_INITIAL_STATE = {
   hidden: true,
+  cartItems: [],
 };
 
-const userReducer = (state = INITIAL_STATE, action) => {
+const userReducer = (state = USER_INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_CURRENT_USER:
       return { ...state, currentUser: action.payload };
@@ -24,6 +30,12 @@ const cartReducer = (state = CART_INITIAL_STATE, action) => {
       return {
         ...state,
         hidden: !state.hidden,
+      };
+    case ADD_ITEM_TO_CART:
+      //add item to an array nested inside an object
+      return {
+        ...state,
+        cartItems: addItemToCart(state.cartItems, action.payload),
       };
     default:
       return state;

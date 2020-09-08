@@ -1,6 +1,7 @@
 import React from 'react';
 import SHOP_DATA from '../../assets/data/shop.data';
 import CollectionPreview from '../../components/CollectionPreview/CollectionPreview.component';
+import { Row } from '../../shared';
 
 class ShopPage extends React.Component {
   constructor(props) {
@@ -22,12 +23,7 @@ class ShopPage extends React.Component {
   };
 
   render() {
-    return (
-      <div>
-        <h1>SHOP PAGE</h1>
-        {this.renderedCollection()}
-      </div>
-    );
+    return <Row>{this.renderedCollection()}</Row>;
   }
 }
 
