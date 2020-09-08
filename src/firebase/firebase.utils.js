@@ -12,7 +12,7 @@ const config = {
   appId: '1:581284366396:web:bd3d0e0bdfb4072ac5db39',
   measurementId: 'G-W2QP2MM9CV',
 };
-// create a user in the Firestore database function
+// create a user in the Firestore database function with userAuth returned from Firebase Authentication
 export const createUserProfileDocument = async (userAuth, addtionalData) => {
   //checl if user is currently signed in.
   if (!userAuth) return;

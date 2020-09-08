@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 import { Header, Row } from '../../shared';
-import { ShoppingBag } from '@styled-icons/boxicons-regular';
 import { auth } from '../../firebase/firebase.utils';
+import CartIcon from '../CartIcon/CartIcon.component';
+import CartDropdown from '../CartDropDown/CartDropDown.component';
 
 const NavBar = styled(Row)`
   display: flex;
@@ -22,7 +24,8 @@ const NavBar = styled(Row)`
 
     li {
       margin: 0 3rem;
-      a {
+      a,
+      div {
         color: midnightblue;
         text-decoration: none;
         border-bottom: 2px solid transparent;
@@ -47,7 +50,7 @@ const Icon = styled.div`
   padding-bottom: 5px;
 `;
 
-const NavigationBar = ({ currentUser }) => {
+const NavigationBar = ({ currentUser, cartHidden }) => {
   return (
     <Header>
       <NavBar>
@@ -71,21 +74,25 @@ const NavigationBar = ({ currentUser }) => {
             </li>
             <li>
               {currentUser ? (
-                <div onClick={() => auth.signOut()}>SIGN OUT</div>
+                <div
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => auth.signOut()}
+                >
+                  SIGN OUT
+                </div>
               ) : (
                 <Link to="/signin">SIGN IN</Link>
               )}
             </li>
           </ul>
         </div>
-        <Icon>
-          <a href="/#">
-            <ShoppingBag size="20" title="Shopping Bag" />
-          </a>
-        </Icon>
+        <CartIcon />
       </NavBar>
+      {cartHidden ? null : <CartDropdown />}
     </Header>
   );
 };
-
-export default NavigationBar;
+const mapStateToProps = (state) => {
+  return { currentUser: state.user.currentUser, cartHidden: state.cart.hidden };
+};
+export default connect(mapStateToProps, null)(NavigationBar);
