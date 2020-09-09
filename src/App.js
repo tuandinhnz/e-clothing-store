@@ -2,14 +2,17 @@ import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import NavigationBar from './components/Header/Header.component';
 import HomePage from './pages/homepage/homepage.component';
 // import HatsPage from './pages/hatspage';
 import ShopPage from './pages/shoppage/shoppage.component.';
+import CheckoutPage from './pages/checkoutpage/checkout.component';
 import SignInSignUp from './pages/sign-in-sign-up-page/sign-in-sign-up-page';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './actions';
+import { selectCurrentUser } from './reducers/user.selectors';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -76,6 +79,7 @@ class App extends React.Component {
                 this.props.currentUser ? <Redirect to="/" /> : <SignInSignUp />
               }
             />
+            <Route exact path="/checkout" component={CheckoutPage} />
           </Switch>
         </BrowserRouter>
       </>
@@ -83,8 +87,8 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { currentUser: state.user.currentUser };
-};
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
 
 export default connect(mapStateToProps, { setCurrentUser })(App);

@@ -1,12 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import { Link } from 'react-router-dom';
 import { Header, Row } from '../../shared';
 import { auth } from '../../firebase/firebase.utils';
 import CartIcon from '../CartIcon/CartIcon.component';
 import CartDropdown from '../CartDropDown/CartDropDown.component';
+import {
+  selectCurrentUser,
+  selectCartHidden,
+} from '../../reducers/user.selectors';
 
 const NavBar = styled(Row)`
   display: flex;
@@ -91,7 +96,8 @@ const NavigationBar = ({ currentUser, cartHidden }) => {
     </Header>
   );
 };
-const mapStateToProps = (state) => {
-  return { currentUser: state.user.currentUser, cartHidden: state.cart.hidden };
-};
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  cartHidden: selectCartHidden,
+});
 export default connect(mapStateToProps, null)(NavigationBar);

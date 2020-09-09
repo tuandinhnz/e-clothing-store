@@ -20,3 +20,15 @@ export const selectCartItemsCount = createSelector(
       0
     )
 );
+
+//seletor select the total amount to pay for the items in Cart
+
+export const selectCartItemsTotalAmount = createSelector(
+  [selectCartItems],
+  (cartItems) =>
+    cartItems.reduce(
+      (accumulatedQuatity, cartItem) =>
+        accumulatedQuatity + cartItem.price * cartItem.quantity,
+      0
+    )
+);

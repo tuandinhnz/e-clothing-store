@@ -3,8 +3,9 @@ import {
   SET_CURRENT_USER,
   TOGGLE_CART_HIDDEN,
   ADD_ITEM_TO_CART,
+  REMOVE_ITEM_FROM_CART,
 } from '../actions/actions.type';
-import { addItemToCart } from './cart.utils';
+import { addItemToCart, removeItemFromCart } from './cart.utils';
 
 const USER_INITIAL_STATE = {
   currentUser: null,
@@ -36,6 +37,11 @@ const cartReducer = (state = CART_INITIAL_STATE, action) => {
       return {
         ...state,
         cartItems: addItemToCart(state.cartItems, action.payload),
+      };
+    case REMOVE_ITEM_FROM_CART:
+      return {
+        ...state,
+        cartItems: removeItemFromCart(state.cartItems, action.payload),
       };
     default:
       return state;

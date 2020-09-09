@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export const addItemToCart = (cartItems, cartItemToAdd) => {
   const existingCartItem = cartItems.find(
     (cartItem) => cartItem.id === cartItemToAdd.id
@@ -13,4 +15,21 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
   }
   // If the item is not existed, add the quatity property to the item and set the base quantity to 1
   return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
+};
+
+export const removeItemFromCart = (cartItems, cartItemToRemove) => {
+  const existingCartItem = cartItems.find(
+    (cartItem) => cartItem.id === cartItemToRemove.id
+  );
+
+  // If more than one item added to cart, decrease the quantity by 1
+  if (existingCartItem.quantity > 1) {
+    return cartItems.map((cartItem) =>
+      cartItem.id === cartItemToRemove.id
+        ? { ...cartItem, quantity: cartItem.quantity - 1 }
+        : cartItem
+    );
+  }
+  // If there is only 1 item, remove the item from the cart Items
+  return cartItems.filter((cartItem) => cartItem === cartItemToRemove);
 };
