@@ -44,7 +44,6 @@ const ItemTitleContainer = styled(Container)`
 const MenuItem = ({ section, history, match }) => {
   return (
     <MenuItemContainer size={section.imageSize} imageUrl={section.imageUrl}>
-      {/* <img src={section.imageUrl} alt={section.id} /> */}
       <ItemTitleContainer
         onClick={() => history.push(`${match.url}${section.linkUrl}`)}
       >

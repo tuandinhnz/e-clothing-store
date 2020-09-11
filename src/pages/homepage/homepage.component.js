@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import MenuItem from '../../components/MenuItem/MenuItem.component';
 
-import { sections } from '../../assets/data/directory.data';
 import { Section, Row } from '../../shared';
+import { selectDirectory } from '../../reducers/directory.selectors';
 
 const Menu = styled(Row)`
   margin-top: 10px;
@@ -14,7 +16,7 @@ const Menu = styled(Row)`
   justify-items: center;
   align-items: center;
 `;
-const HomePage = () => {
+const HomePage = ({ sections }) => {
   const renderedMenuItems = sections.map((section) => {
     return <MenuItem section={section} key={section.id} />;
   });
@@ -26,5 +28,7 @@ const HomePage = () => {
     </>
   );
 };
-
-export default HomePage;
+const mapStateToProps = createStructuredSelector({
+  sections: selectDirectory,
+});
+export default connect(mapStateToProps, null)(HomePage);

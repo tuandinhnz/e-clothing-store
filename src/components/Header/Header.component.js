@@ -48,12 +48,6 @@ const Logo = styled.div`
   margin-left: 10px;
 `;
 
-const Icon = styled.div`
-  margin-right: 15px;
-  margin-left: 25px;
-  padding-bottom: 5px;
-`;
-
 const NavigationBar = ({ currentUser, cartHidden }) => {
   return (
     <Header>

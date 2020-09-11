@@ -1,13 +1,13 @@
 import React from 'react';
 import { createGlobalStyle } from 'styled-components';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import NavigationBar from './components/Header/Header.component';
 import HomePage from './pages/homepage/homepage.component';
 // import HatsPage from './pages/hatspage';
-import ShopPage from './pages/shoppage/shoppage.component.';
+import ShopPage from './pages/shoppage/shoppage.component';
 import CheckoutPage from './pages/checkoutpage/checkout.component';
 import SignInSignUp from './pages/sign-in-sign-up-page/sign-in-sign-up-page';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
@@ -66,22 +66,20 @@ class App extends React.Component {
     return (
       <>
         <GlobalStyle />
-        <BrowserRouter>
-          <NavigationBar />
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/shop" component={ShopPage} />
-            <Route
-              exact
-              path="/signin"
-              // redirect the user back to the homepage after signing in
-              render={() =>
-                this.props.currentUser ? <Redirect to="/" /> : <SignInSignUp />
-              }
-            />
-            <Route exact path="/checkout" component={CheckoutPage} />
-          </Switch>
-        </BrowserRouter>
+        <NavigationBar />
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/shop" component={ShopPage} />
+          <Route
+            exact
+            path="/signin"
+            // redirect the user back to the homepage after signing in
+            render={() =>
+              this.props.currentUser ? <Redirect to="/" /> : <SignInSignUp />
+            }
+          />
+          <Route exact path="/checkout" component={CheckoutPage} />
+        </Switch>
       </>
     );
   }

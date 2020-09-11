@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 export const addItemToCart = (cartItems, cartItemToAdd) => {
   const existingCartItem = cartItems.find(
     (cartItem) => cartItem.id === cartItemToAdd.id
@@ -30,6 +28,6 @@ export const removeItemFromCart = (cartItems, cartItemToRemove) => {
         : cartItem
     );
   }
-  // If there is only 1 item, remove the item from the cart Items
-  return cartItems.filter((cartItem) => cartItem === cartItemToRemove);
+  // If there is only 1 item, do nothing
+  return cartItems;
 };

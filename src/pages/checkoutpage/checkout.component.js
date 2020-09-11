@@ -6,12 +6,12 @@ import {
   selectCartItems,
   selectCartItemsTotalAmount,
 } from '../../reducers/cart.selectors';
-import { removeItem } from '../../actions';
+
 import CheckoutItem from '../../components/CheckOutItem/CheckoutItem.component';
 
 import './checkout.styles.scss';
 
-const CheckoutPage = ({ cartItems, totalAmount, removeItem }) => {
+const CheckoutPage = ({ cartItems, totalAmount }) => {
   return (
     <Row>
       <div className="checkout-page">
@@ -47,4 +47,4 @@ const mapStateToProps = createStructuredSelector({
   cartItems: selectCartItems,
   totalAmount: selectCartItemsTotalAmount,
 });
-export default connect(mapStateToProps, { removeItem })(CheckoutPage);
+export default connect(mapStateToProps, null)(CheckoutPage);
