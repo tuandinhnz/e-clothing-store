@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 
 import CollectionOverview from '../../components/CollectionOverview/CollectionOverview.component';
-import CollectionPage from '../../components/collection/CollectionPage.component';
+import CollectionPage from '../CollectionPage/CollectionPage.component';
 import { Row } from '../../shared';
 
 const ShopPage = ({ match }) => {
