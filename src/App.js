@@ -9,9 +9,14 @@ import HomePage from './pages/HomePage/HomePage.component';
 import ShopPage from './pages/ShopPage/ShopPage.component';
 import CheckoutPage from './pages/CheckoutPage/CheckoutPage.component';
 import SignInSignUpPage from './pages/SignInSignUpPage/SignInSignUpPage.component';
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import {
+  auth,
+  createUserProfileDocument,
+  // addCollectionAndDocuments,
+} from './firebase/firebase.utils';
 import { setCurrentUser } from './actions';
 import { selectCurrentUser } from './selectors/user.selectors';
+// import { selectShopDataForOverview } from './selectors/shopData.selectors';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -54,6 +59,10 @@ class App extends React.Component {
       }
       // If the user logout, set the currentUser state to null again
       setCurrentUser(userAuth);
+      // addCollectionAndDocuments(
+      //   'collections',
+      //   collectionsArray.map(({ title, items }) => ({ title, items }))
+      // );
     });
   }
 
@@ -90,6 +99,7 @@ class App extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+  // collectionsArray: selectShopDataForOverview,
 });
 
 export default connect(mapStateToProps, { setCurrentUser })(App);

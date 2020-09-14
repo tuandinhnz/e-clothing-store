@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import CustomButton from '../CustomButton/CustomButton.component';
 
 export const CollectionItemContainer = styled.div`
-  width: 22vw;
+  width: 19vw;
   display: flex;
   flex-direction: column;
   height: 350px;

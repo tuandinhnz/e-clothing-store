@@ -8,6 +8,7 @@ import {
   ADD_ITEM_TO_CART,
   REMOVE_ITEM_FROM_CART,
   CLEAR_ITEM_FROM_CART,
+  UPDATE_COLLECTIONS,
 } from '../actions/actions.type';
 import { addItemToCart, removeItemFromCart } from '../utils/cart.utils';
 import { sections } from '../assets/data/directory.data';
@@ -39,8 +40,15 @@ const directoryReducer = (state = DIRECTORY_INITIAL_STATE) => {
   return state;
 };
 
-const shopDataReducer = (state = SHOP_DATA_INITIAL_STATE) => {
-  return state;
+const shopDataReducer = (state = SHOP_DATA_INITIAL_STATE, action) => {
+  switch (action.type) {
+    case UPDATE_COLLECTIONS:
+      return {
+        ...action.payload,
+      };
+    default:
+      return state;
+  }
 };
 
 const userReducer = (state = USER_INITIAL_STATE, action) => {
