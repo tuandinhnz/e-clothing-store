@@ -9,7 +9,7 @@ import {
   REMOVE_ITEM_FROM_CART,
   CLEAR_ITEM_FROM_CART,
 } from '../actions/actions.type';
-import { addItemToCart, removeItemFromCart } from './cart.utils';
+import { addItemToCart, removeItemFromCart } from '../utils/cart.utils';
 import { sections } from '../assets/data/directory.data';
 import SHOP_DATA from '../assets/data/shop.data';
 

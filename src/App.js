@@ -4,15 +4,14 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import NavigationBar from './components/Header/Header.component';
-import HomePage from './pages/homepage/homepage.component';
-// import HatsPage from './pages/hatspage';
-import ShopPage from './pages/shoppage/shoppage.component';
-import CheckoutPage from './pages/checkoutpage/checkout.component';
-import SignInSignUp from './pages/sign-in-sign-up-page/sign-in-sign-up-page';
+import Header from './components/Header/Header.component';
+import HomePage from './pages/HomePage/HomePage.component';
+import ShopPage from './pages/ShopPage/ShopPage.component';
+import CheckoutPage from './pages/CheckoutPage/CheckoutPage.component';
+import SignInSignUpPage from './pages/SignInSignUpPage/SignInSignUpPage.component';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './actions';
-import { selectCurrentUser } from './reducers/user.selectors';
+import { selectCurrentUser } from './selectors/user.selectors';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -25,8 +24,8 @@ const GlobalStyle = createGlobalStyle`
   html,
   body {
     background-color: white;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 62.5%;
+    font-family: 'Lato', sans-serif;
+    font-size: 100%;
     font-weight: 400;
     margin: inherit;
     padding: inherit;
@@ -66,16 +65,20 @@ class App extends React.Component {
     return (
       <>
         <GlobalStyle />
-        <NavigationBar />
+        <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
           <Route
             exact
             path="/signin"
-            // redirect the user back to the homepage after signing in
+            // redirect the user back to the homepage after successfully signed in
             render={() =>
-              this.props.currentUser ? <Redirect to="/" /> : <SignInSignUp />
+              this.props.currentUser ? (
+                <Redirect to="/" />
+              ) : (
+                <SignInSignUpPage />
+              )
             }
           />
           <Route exact path="/checkout" component={CheckoutPage} />

@@ -5,6 +5,7 @@ import {
   REMOVE_ITEM_FROM_CART,
   CLEAR_ITEM_FROM_CART,
 } from './actions.type';
+
 export const setCurrentUser = (user) => {
   return {
     type: SET_CURRENT_USER,
