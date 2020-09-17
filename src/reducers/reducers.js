@@ -12,7 +12,6 @@ import {
 } from '../actions/actions.type';
 import { addItemToCart, removeItemFromCart } from '../utils/cart.utils';
 import { sections } from '../assets/data/directory.data';
-import SHOP_DATA from '../assets/data/shop.data';
 
 //define a persist config, a JSON object represent configuration that we want Redux Persist to use
 
@@ -34,7 +33,7 @@ const CART_INITIAL_STATE = {
 
 const DIRECTORY_INITIAL_STATE = sections;
 
-const SHOP_DATA_INITIAL_STATE = SHOP_DATA;
+const SHOP_DATA_INITIAL_STATE = null;
 
 const directoryReducer = (state = DIRECTORY_INITIAL_STATE) => {
   return state;

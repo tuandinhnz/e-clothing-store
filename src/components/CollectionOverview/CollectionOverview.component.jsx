@@ -7,10 +7,13 @@ import CollectionPreview from '../CollectionPreview/CollectionPreview.component'
 
 import { CollectionsOverviewContainer } from './CollectionOverview.styles';
 
-const CollectionOverview = ({ collections }) => {
+const CollectionOverview = ({ collections, match, history, routeName }) => {
   const renderedCollectionOverview = collections.map((collection) => {
     return (
       <CollectionPreview
+        match={match}
+        history={history}
+        routeName={collection.routeName}
         key={collection.id}
         title={collection.title}
         items={collection.items}
