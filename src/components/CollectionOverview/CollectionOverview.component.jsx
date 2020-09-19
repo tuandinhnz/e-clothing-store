@@ -20,6 +20,7 @@ const CollectionOverview = ({ collections, match, history, routeName }) => {
       />
     );
   });
+  console.log(collections);
   return (
     <CollectionsOverviewContainer>
       {renderedCollectionOverview}

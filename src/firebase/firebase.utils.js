@@ -45,10 +45,16 @@ export const addCollectionAndDocuments = async (
   const collectionRef = firestore.collection(collectionKey);
   // to make sure all documents are added to the Firestore successfully, we need to add them to a batch. If the creating process fails halfway for some reasons, the whole batch will fail and we have to start the creating again. We don't want only half of the documents are added to Firestore.
   const batch = firestore.batch();
+
   objectsToAdd.forEach((obj) => {
     const newDocRef = collectionRef.doc();
     batch.set(newDocRef, obj);
   });
+
+  // for (let i=0; i < objectsToAdd.length; i++) {
+  //   const newDocRef = collectionRef.doc();
+  //   batch.set(newDocRef, objectsToAdd[i]);
+  // }
 
   return await batch.commit();
 };

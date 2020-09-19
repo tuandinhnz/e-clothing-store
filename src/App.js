@@ -4,6 +4,8 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+// import SHOP_DATA_FIREBASE from './assets/data/shop.data_forfirebase';
+
 import Header from './components/Header/Header.component';
 import HomePage from './pages/HomePage/HomePage.component';
 import ShopPage from './pages/ShopPage/ShopPage.component';
@@ -61,7 +63,7 @@ class App extends React.Component {
       setCurrentUser(userAuth);
       // addCollectionAndDocuments(
       //   'collections',
-      //   collectionsArray.map(({ title, items }) => ({ title, items }))
+      //   SHOP_DATA_FIREBASE.map(({ title, items }) => ({ title, items }))
       // );
     });
   }

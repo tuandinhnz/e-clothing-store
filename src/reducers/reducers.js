@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
+import { shopDataReducer } from './shopReducer';
 // the import below tell redux-persist that we want to use the local storage of the window object of the browser. We can also use the session storage if we want by importing the sessionstorage
 import storage from 'redux-persist/lib/storage';
 import {
@@ -8,7 +9,6 @@ import {
   ADD_ITEM_TO_CART,
   REMOVE_ITEM_FROM_CART,
   CLEAR_ITEM_FROM_CART,
-  UPDATE_COLLECTIONS,
 } from '../actions/actions.type';
 import { addItemToCart, removeItemFromCart } from '../utils/cart.utils';
 import { sections } from '../assets/data/directory.data';
@@ -33,21 +33,8 @@ const CART_INITIAL_STATE = {
 
 const DIRECTORY_INITIAL_STATE = sections;
 
-const SHOP_DATA_INITIAL_STATE = null;
-
 const directoryReducer = (state = DIRECTORY_INITIAL_STATE) => {
   return state;
-};
-
-const shopDataReducer = (state = SHOP_DATA_INITIAL_STATE, action) => {
-  switch (action.type) {
-    case UPDATE_COLLECTIONS:
-      return {
-        ...action.payload,
-      };
-    default:
-      return state;
-  }
 };
 
 const userReducer = (state = USER_INITIAL_STATE, action) => {
