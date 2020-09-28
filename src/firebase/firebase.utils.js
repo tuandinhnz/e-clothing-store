@@ -47,7 +47,7 @@ export const addCollectionAndDocuments = async (
   const batch = firestore.batch();
 
   objectsToAdd.forEach((obj) => {
-    const newDocRef = collectionRef.doc();
+    const newDocRef = collectionRef.doc(`${obj.id}`);
     batch.set(newDocRef, obj);
   });
 
@@ -76,14 +76,24 @@ export const convertCollectionsSnapshotToMap = (collections) => {
   }, {});
 };
 
+// utils to check if user is signed in
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unscribe = auth.onAuthStateChanged((userAuth) => {
+      unscribe();
+      resolve(userAuth);
+    }, reject);
+  });
+};
+
 // Initialize Firebase
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: 'select_account' });
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: 'select_account' });
+export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
 
 export default firebase;

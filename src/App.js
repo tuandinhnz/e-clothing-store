@@ -11,13 +11,9 @@ import HomePage from './pages/HomePage/HomePage.component';
 import ShopPage from './pages/ShopPage/ShopPage.component';
 import CheckoutPage from './pages/CheckoutPage/CheckoutPage.component';
 import SignInSignUpPage from './pages/SignInSignUpPage/SignInSignUpPage.component';
-import {
-  auth,
-  createUserProfileDocument,
-  // addCollectionAndDocuments,
-} from './firebase/firebase.utils';
-import { setCurrentUser } from './actions';
+
 import { selectCurrentUser } from './selectors/user.selectors';
+import { checkUserSession } from './actions';
 // import { selectShopDataForOverview } from './selectors/shopData.selectors';
 
 const GlobalStyle = createGlobalStyle`
@@ -42,34 +38,40 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 class App extends React.Component {
-  unsubscribefromAuth = null;
+  // unsubscribefromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
-    this.unsubscribefromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-        // the onSnapShot method allow us to listen to the doc on in the FireStore database for any changes to the data. It always return a latest version of that snapshot. To get the actual data of the snapshot we need to call the data() method
-        userRef.onSnapshot((snapshot) => {
-          console.log(snapshot);
-          console.log(snapshot.data());
-          setCurrentUser({
-            id: snapshot.id,
-            ...snapshot.data(),
-          });
-        });
-      }
-      // If the user logout, set the currentUser state to null again
-      setCurrentUser(userAuth);
-      // addCollectionAndDocuments(
-      //   'collections',
-      //   SHOP_DATA_FIREBASE.map(({ title, items }) => ({ title, items }))
-      // );
-    });
-  }
+    const { checkUserSession } = this.props;
+    checkUserSession();
+    // const { setCurrentUser } = this.props;
+    // this.unsubscribefromAuth = auth.onAuthStateChanged(async (userAuth) => {
+    //   console.log(userAuth);
+    //   if (userAuth) {
+    //     const userRef = await createUserProfileDocument(userAuth);
+    //     // the onSnapShot method allow us to listen to the doc on in the FireStore database for any changes to the data. It always return a latest version of that snapshot. To get the actual data of the snapshot we need to call the data() method
+    //     userRef.onSnapshot((snapshot) => {
+    //       console.log(snapshot);
+    //       console.log(snapshot.data());
+    //       setCurrentUser({
+    //         id: snapshot.id,
+    //         ...snapshot.data(),
+    //       });
+    //     });
+    //   }
+    // If the user logout, set the currentUser state to null again
+    // setCurrentUser(userAuth);
+    // addCollectionAndDocuments(
+    //   'collections',
+    //   SHOP_DATA_FIREBASE.map(({ id, title, items }) => ({ id, title, items }))
+    // );
+    // console.log(
+    //   SHOP_DATA_FIREBASE.map(({ id, title, items }) => ({ id, title, items }))
+    // );
+    // });
+    // }
 
-  componentWillUnmount() {
-    this.unsubscribefromAuth();
+    // componentWillUnmount() {
+    //   this.unsubscribefromAuth();
   }
 
   render() {
@@ -104,4 +106,4 @@ const mapStateToProps = createStructuredSelector({
   // collectionsArray: selectShopDataForOverview,
 });
 
-export default connect(mapStateToProps, { setCurrentUser })(App);
+export default connect(mapStateToProps, { checkUserSession })(App);

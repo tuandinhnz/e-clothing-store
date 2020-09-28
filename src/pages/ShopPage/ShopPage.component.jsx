@@ -1,17 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-import { createStructuredSelector } from 'reselect';
 
-import { fetchCollectionsStartAsync } from '../../actions';
+import { fetchCollectionsStart } from '../../actions';
 
 import CollectionOverviewContainer from '../../components/CollectionOverview/CollectionOverview.container';
 import CollectionPageContainer from '../../pages/CollectionPage/CollectionPage.container';
 
 class ShopPage extends React.Component {
   componentDidMount() {
-    const { fetchCollectionsStartAsync } = this.props;
-    fetchCollectionsStartAsync();
+    const { fetchCollectionsStart } = this.props;
+    fetchCollectionsStart();
   }
   render() {
     const { match } = this.props;
@@ -31,4 +30,4 @@ class ShopPage extends React.Component {
   }
 }
 
-export default connect(null, { fetchCollectionsStartAsync })(ShopPage);
+export default connect(null, { fetchCollectionsStart })(ShopPage);
