@@ -30,6 +30,9 @@ export const AddButton = styled(CustomButton)`
     opacity: 0.85;
     display: flex;
   }
+  @media screen and (max-width: 800px) {
+    margin: auto auto;
+  }
 
   @media screen and (max-width: 800px) {
     display: block;
