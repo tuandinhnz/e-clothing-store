@@ -8,7 +8,11 @@ export const CollectionItemContainer = styled.div`
   height: 350px;
   align-items: center;
   position: relative;
-  margin: 0 30px;
+
+  @media screen and (max-width: 800px) {
+    width: 40vw;
+    font-size: 0.5rem;
+  }
 `;
 
 export const AddButton = styled(CustomButton)`
@@ -25,6 +29,15 @@ export const AddButton = styled(CustomButton)`
   ${CollectionItemContainer}:hover & {
     opacity: 0.85;
     display: flex;
+  }
+
+  @media screen and (max-width: 800px) {
+    display: block;
+    opacity: 0.9;
+    min-width: unset;
+    padding: 0 10px 0 10px;
+
+    font-size: 0.7rem;
   }
 `;
 
@@ -47,6 +60,9 @@ export const CollectionFooterContainer = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 18px;
+  @media screen and (max-width: 800px) {
+    font-size: 0.8rem;
+  }
 `;
 
 export const NameContainer = styled.span`

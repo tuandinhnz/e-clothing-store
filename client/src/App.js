@@ -23,7 +23,6 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   
-  
   html,
   body {
     background-color: white;
@@ -31,9 +30,14 @@ const GlobalStyle = createGlobalStyle`
     font-size: 100%;
     font-weight: 400;
     margin: inherit;
-    padding: inherit;
+    padding: 20px 40px;
     text-rendering: optimizeLegibility;
 	  overflow-x: hidden;
+
+    @media screen and (max-width: 800px) {
+      padding: 10px;
+      
+    }
   }
 `;
 
