@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -7,10 +7,12 @@ import { createStructuredSelector } from 'reselect';
 // import SHOP_DATA_FIREBASE from './assets/data/shop.data_forfirebase';
 
 import Header from './components/Header/Header.component';
-import HomePage from './pages/HomePage/HomePage.component';
-import ShopPage from './pages/ShopPage/ShopPage.component';
-import CheckoutPage from './pages/CheckoutPage/CheckoutPage.component';
-import SignInSignUpPage from './pages/SignInSignUpPage/SignInSignUpPage.component';
+import Spinner from './components/Spinner/Spinner.component';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary.component';
+// import HomePage from './pages/HomePage/HomePage.component';
+// import ShopPage from './pages/ShopPage/ShopPage.component';
+// import CheckoutPage from './pages/CheckoutPage/CheckoutPage.component';
+// import SignInSignUpPage from './pages/SignInSignUpPage/SignInSignUpPage.component';
 
 import { selectCurrentUser } from './selectors/user.selectors';
 import { checkUserSession } from './actions';
@@ -26,7 +28,7 @@ const GlobalStyle = createGlobalStyle`
   html,
   body {
     background-color: white;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Open Sans Condensed', 'Lato';
     font-size: 100%;
     font-weight: 400;
     margin: inherit;
@@ -40,6 +42,15 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 `;
+
+const HomePage = lazy(() => import('./pages/HomePage/HomePage.component'));
+const ShopPage = lazy(() => import('./pages/ShopPage/ShopPage.component'));
+const CheckoutPage = lazy(() =>
+  import('./pages/CheckoutPage/CheckoutPage.component')
+);
+const SignInSignUpPage = lazy(() =>
+  import('./pages/SignInSignUpPage/SignInSignUpPage.component')
+);
 
 const App = ({ checkUserSession, currentUser }) => {
   // unsubscribefromAuth = null;
@@ -82,17 +93,24 @@ const App = ({ checkUserSession, currentUser }) => {
       <GlobalStyle />
       <Header />
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/shop" component={ShopPage} />
-        <Route
-          exact
-          path="/signin"
-          // redirect the user back to the homepage after successfully signed in
-          render={() =>
-            currentUser ? <Redirect to="/" /> : <SignInSignUpPage />
-          }
-        />
-        <Route exact path="/checkout" component={CheckoutPage} />
+        {/* The ErrorBoundary component used to catch any errors that happens during rendering process because the Suspense won't be able to handle the errors */}
+        <ErrorBoundary>
+          <Suspense fallback={<Spinner />}>
+            {/* Suspense allow us to lazy load an async component. Suspense always has the attribute fallback */}
+            <Route exact path="/" component={HomePage} />
+
+            <Route path="/shop" component={ShopPage} />
+            <Route
+              exact
+              path="/signin"
+              // redirect the user back to the homepage after successfully signed in
+              render={() =>
+                currentUser ? <Redirect to="/" /> : <SignInSignUpPage />
+              }
+            />
+            <Route exact path="/checkout" component={CheckoutPage} />
+          </Suspense>
+        </ErrorBoundary>
       </Switch>
     </>
   );
